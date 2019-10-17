@@ -1,0 +1,223 @@
+// 20191017152726
+// https://gofigure.thoughtworks.net/api/platform/location/docs
+
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "location API",
+    "version": "1.0.0",
+    "description": "API with location capabilities."
+  },
+  "produces": [
+    "application/json",
+    "application/x-yaml",
+    "application/edn",
+    "application/transit+json",
+    "application/transit+msgpack"
+  ],
+  "consumes": [
+    "application/json",
+    "application/x-yaml",
+    "application/edn",
+    "application/transit+json",
+    "application/transit+msgpack"
+  ],
+  "basePath": "/api/location",
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "location"
+        ],
+        "summary": "API for health check by ALB.",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/locations": {
+      "get": {
+        "tags": [
+          "location"
+        ],
+        "summary": "Locations API. Provides list of all locations.",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/locations"
+            },
+            "description": "Success"
+          },
+          "500": {
+            "schema": {
+              
+            },
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/countries": {
+      "get": {
+        "tags": [
+          "location"
+        ],
+        "summary": "Countries API. Provides list of all countries operated by thoughtworks.",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/countries"
+            },
+            "description": "Success"
+          },
+          "500": {
+            "schema": {
+              
+            },
+            "description": "Internal Server error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "address": {
+      "type": "object",
+      "properties": {
+        "postal_code": {
+          "type": "string"
+        },
+        "fax": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "telephone": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "company_name": {
+          "type": "string"
+        },
+        "line2": {
+          "type": "string"
+        },
+        "line3": {
+          "type": "string"
+        },
+        "line1": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "postal_code",
+        "fax",
+        "email",
+        "telephone",
+        "city",
+        "state",
+        "company_name",
+        "line2",
+        "line3",
+        "line1"
+      ]
+    },
+    "countries": {
+      "type": "object",
+      "properties": {
+        "countries": {
+          
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "countries"
+      ]
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "address": {
+          "$ref": "#/definitions/address"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Non Physical",
+            "Local Office"
+          ]
+        },
+        "region": {
+          "type": "string"
+        },
+        "office": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Closed",
+            "Active",
+            "Inactive"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "market": {
+          "type": "string"
+        },
+        "location_code": {
+          "type": "string"
+        },
+        "business_unit": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "description",
+        "address",
+        "type",
+        "region",
+        "office",
+        "status",
+        "id",
+        "market",
+        "location_code",
+        "business_unit",
+        "country"
+      ]
+    },
+    "locations": {
+      "type": "object",
+      "properties": {
+        "locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/location"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "locations"
+      ]
+    }
+  }
+}
